@@ -1,5 +1,13 @@
-image: gitpod/workspace-full
+image:
+  file: Dockerfile
+ports:
+  - port: 8000
 
 tasks:
-  - init: 'echo "TODO: Replace with init/build command"'
-    command: 'echo "TODO: Replace with command to start project"'
+  - init: 'Initial configuration'
+    command: |
+    cp webvirtcloud/settings.py.template webvirtcloud/settings.py
+    python3 -m venv venv
+    . venv/bin/activate
+    pip3 install -r conf/requirements.txt
+    python3 manage.py migrate
